@@ -1,0 +1,4 @@
+select unique_id,name
+from Employees E
+left join EmployeeUNI U
+on isnull(E.id,'')=isnull(U.id,'')
