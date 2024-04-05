@@ -1,0 +1,10 @@
+select a.sell_date, count(DISTINCT a.product) num_sold,
+       (SELECT STRING_AGG(p.product, ',') WITHIN GROUP (ORDER BY p.product) 
+        FROM ( SELECT DISTINCT product 
+               FROM Activities 
+               WHERE sell_date = a.sell_date
+             ) p
+       ) [products]
+FROM Activities a
+GROUP BY sell_date
+ORDER BY sell_date
